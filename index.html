@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>COVIDINFO</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="./css/all.css">
+  <link rel="stylesheet" href="./css/style.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <style>
+    body {
+      position: relative; 
+    }
+    #section1 {padding-top:50px;height:500px;color: #fff; background-color: #00d346;}
+    #section2 {padding-top:50px;height:500px;color: #fff; background-color: #009714;}
+    #section31 {padding-top:50px;height:500px;color: #fff; background-color: #009160;}
+    #section32 {padding-top:50px;height:500px;color: #fff; background-color: #00bcd4;}
+    #section4 {padding-top:50px;height:500px;color: #fff; background-color: #0267b9;}
+  </style>
+  <style>
+    .carousel-inner > .item > img,
+    .carousel-inner > .item > a > img
+  {
+    width: 100%;
+    margin: auto;
+  }
+  </style>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+
+    <!--header-->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>                        
+          </button>
+          <a class="navbar-brand" href="#">CovidInfo</a>
+        </div>
+        <div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+              <li><a href="#section1">Carousel</a></li>
+              <li><a href="#section2">Heatmap</a></li>
+              <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Data views<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#section31">TABLE VIEW</a></li>
+                  <li><a href="#section32">CHARTS VIEW</a></li>
+                </ul>
+              </li>
+              <li><a href="#section4">Contacts</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!--header end-->
+  
+<!--site content-->
+
+ <!--Site title-->
+ <div class="container">
+  <br>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <!-- <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li> -->
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+
+      <div class="item active">
+        <img src="./assets/virus-1.jpg" alt="Virus">
+        <div class="carousel-caption">
+          <h3>COVID-19</h3>
+          <p>THE BEST PROTECTION IS INFORMATION!</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="./assets/gym-wallpaper-1.jpg" alt="GYM">
+        <div class="carousel-caption">
+          <h3>COVID-19</h3>
+          <p>STAY FIT!</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+<!---xSite title-x-->
+
+
+<div id="section1" class="container-fluid">
+  <h1>SITE TITLE</h1>
+  <p>info</p>
+  <p>info</p>
+</div>
+<div id="section2" class="container-fluid">
+  <h1>HEATMAP</h1>
+  <p>side menu</p>
+  <p>heatmap on the right</p>
+</div>
+<div id="section31" class="container-fluid">
+  <h1>TABLE VIEW</h1>
+  <p>menu</p>
+  <p>table/grid</p>
+</div>
+<div id="section32" class="container-fluid">
+  <h1>CHART VIEW</h1>
+  <p>menu</p>
+  <p>chart</p>
+</div>
+<div id="section4" class="container-fluid">
+  <h1>CONTACTS</h1>
+  <p>info</p>
+  <p>info</p>
+</div>
+
+<!--site content end-->
+
+
+<!-- Footer -->
+<footer class="page-footer font-small ">
+
+    <!-- Footer Links -->
+    <div class="container-fluid text-center text-md-left">
+  
+      <!-- Grid row -->
+      <div class="row footer-row">
+        
+        <!-- Grid column -->
+        <div class="col-md-6">
+  
+          <!-- Content -->
+          <h5 class="Footer-content text-uppercase">Some description! </h5>
+          <p>Some text here! Motivational quotes or whatever. Machkai Grisho!</p>
+  
+        </div>
+        <!-- Grid column -->
+  
+        <hr class="clearfix w-100 d-md-none pb-3">
+  
+        <!-- Grid column -->
+        <div class="col-md-3">
+  
+          <!-- Links -->
+          <h5 class="Instagram-links text-uppercase">Follow us on: </h5>
+  
+          <ul class="list-unstyled">
+            <li>
+                <i class="fa fa-instagram" aria-hidden="true"><a href="#!">  @NeshtoSiCovidINF</a> </i>
+            </li>
+            <li>
+                <i class="fa fa-instagram" aria-hidden="true"><a href="#!">  @Brsdsa56s</a> </i>
+            </li>
+            <li>
+                <i class="fa fa-instagram" aria-hidden="true"><a href="#!">  @Bobsana</a> </i>
+            </li>
+          </ul>
+  
+        </div>
+        <!-- Grid column -->
+  
+        <!-- Grid column -->
+        <div class="col-md-3">
+          <!-- Links -->
+          <h5 class="Other-links text-uppercase">Links</h5>
+  
+          <ul class="list-unstyled">
+            <li>
+                <i class="fa fa-facebook-square" aria-hidden="true"> <a href="#"> Facebook link! </a></i> 
+            </li>
+            <li>
+                <i class="fa fa-twitter" aria-hidden="true"><a href="#"> Instagram link! </a></i>
+            </li>
+            <li>
+                <a href="#" class="fa fa-instagram"> Instagram link</a> 
+            </li>
+            <li>
+                <a href="#" class="fa fa-youtube"> Youtube link</a> 
+            </li>
+          </ul>
+  
+        </div>
+        <!-- Grid column -->
+  
+      </div>
+      <!-- Grid row -->
+  
+    </div>
+    <!-- Footer Links -->
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+      <a href="https://somelink.com/"> tuBoyz.com</a>
+    </div>
+    <!-- Copyright -->
+  
+  </footer>
+  <!-- Footer -->
+
+
+</body>
+</html>

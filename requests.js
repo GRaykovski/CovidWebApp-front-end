@@ -1,26 +1,26 @@
-console.log('asdasdsadasdasasdasdassd');
+console.log('js file loaded');
 
     var $resultshtmldiv=$('#somedivinhtml')
     var $name=$('#somedivinhtml2')
 
-    var tableButton=$('#button1')
+    var tableButton=$('#tableButton')
     var chartButton=$('#chartButton')
     var heatmapButton=$('#heatmapButton')
 
     var idOfOperation
-    var countryOfChoice
+    var countryOfChoice 
     var typeOfAggregation
 
-const encodeInformation = function(){
-    encodeURIComponent()
-}
+
+    //encodeURIComponent()
+
 
 // lambda in ecma script
 //GET in table format
 const getTableData = function() {
     $.ajax({
         type:'GET',
-        url:'/api/v1/data/'+idOfOperation+'/table?page={?}',
+        url:'/api/v1/data/'+idOfOperation+'/table?page=0',
         header:{"x-session-id":idOfOperation},
         success:function(data){
             $.each(data.resources,function(i,element){
@@ -34,9 +34,11 @@ const getTableData = function() {
 }
 
 //GET in diagram format
-const getDiagramData = function() {
+const getChartData = function() {
+    countryOfChoice = encodeURIComponent($("#chartCountriesToChooseFrom :selected").val());
     $.ajax({
             type:'GET',
+            headers:{"X-Session-Id":idOfOperation},
             url:'/api/v1/data/'+idOfOperation+'/diagram?country='+countryOfChoice+'&page=0',
                 success:function(data){
                     $.each(data,function(i,element){
@@ -51,8 +53,11 @@ const getDiagramData = function() {
 
 //GET in heatmap format
 const getHeatmapData = function() {
+
+    typeOfAggregation = encodeURIComponent($("#formatsOfAggregation :selected").val());
         $.ajax({
             type:'GET',
+            headers:{"X-Session-Id":idOfOperation},
             url:'/api/v1/data/'+idOfOperation+'/heatmap?page=2&aggregate_by='+typeOfAggregation,
             success:function(data){
                 $.each(data,function(i,element){
@@ -97,11 +102,12 @@ const getStatusOperation = function()
 
 $(function() {
 
-         console.log( "ready!" );
+    console.log( "ready!" );
 
-         $("#button1").click(() => {
-            alert("kur")
-            var array = []
+    $("#tableButton").click(() => {
+    alert(" table button clicked")
+
+    var array = []
     var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
     for (var i = 0; i < checkboxes.length; i++) {
     array.push(checkboxes[i].value)
@@ -115,7 +121,7 @@ $(function() {
             "Content-Type": "application/json",
             "X-Session-Id":"dsadasdas"},
         
-        //data:JSON.stringify(countriesToOmmit),
+        data:JSON.stringify(countriesToOmmit),
         url:'http://localhost/api/v1/analyze_existing_data',
        
             success:function(response){   // response.data
@@ -126,57 +132,69 @@ $(function() {
                 alert(500);
             }
         })
+        getStatusOperation
+        getTableData
          })
-});
+
+
+    $("#chartButton").click(() => {
+    alert(" chart button clicked")
+
+        $.ajax({
+            type:'POST',
+            headers:{
+                "Content-Type": "application/json",
+                "X-Session-Id":"dsadasdass"},
+            
+            //data:JSON.stringify(countriesToOmmit),
+            url:'http://localhost/api/v1/analyze_existing_data',
+            
+                success:function(response){   // response.data
+                    idOfOperation=response.data
+                    console.log(idOfOperation)
+                },
+                error:function(){
+                    alert(500);
+                }
+            })
+            getStatusOperation
+            getChartData
+         })
+
+    $("#heatmapButton").click(() => {
+    alert(" heatmap button clicked")
+
+    $.ajax({
+        type:'POST',
+        headers:{
+            "Content-Type": "application/json",
+            "X-Session-Id":"dsadasdasss"},
+        
+        //data:JSON.stringify(countriesToOmmit),
+        url:'http://localhost/api/v1/analyze_existing_data',
+        
+            success:function(response){   // response.data
+                idOfOperation=response.data
+                console.log(idOfOperation)
+            },
+            error:function(){
+                alert(500);
+            }
+        })
+        getStatusOperation
+        getHeatmapData
+     })
+
+})
 
 // $("#button1").click(() => {
-//     alert("kur")
-//     var array = []
-//     var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
-
-//     for (var i = 0; i < checkboxes.length; i++) {
-//     array.push(checkboxes[i].value)
-//     }
-//     var countriesToOmmit = {
-//         "excluded":array       
-//         }
-//         $.ajax({
-//         type:'POST',
-//         data:JSON.stringify(countriesToOmmit),
-//         url:'http://localhost/api/v1/analyze_existing_data',
-//             data:countriesToOmmit,
-//             success:function(response){   // response.data
-//                 idOfOperation=response.data
-//             },
-//             error:function(){
-//                 alert(500);
-//             }
-//         })
+//     
+//    
 // })
 
-//POST analysis with existing data:
+//
 // $(tableButton).on('click',function(){
-//     var array = []
-//     var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
-
-//     for (var i = 0; i < checkboxes.length; i++) {
-//     array.push(checkboxes[i].value)
-//     }
-//     var countriesToOmmit = {
-//         "excluded":array       
-//         }
-//         $.ajax({
-//         type:'POST',
-//         data:JSON.stringify(countriesToOmmit),
-//         url:'http://localhost/api/v1/analyze_existing_data',
-//             data:countriesToOmmit,
-//             success:function(response){   // response.data
-//                 idOfOperation=response.data
-//             },
-//             error:function(){
-//                 alert(500);
-//             }
-//         })
+//     
     
 // })   
 

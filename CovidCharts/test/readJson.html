@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Extract data</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  </head>
+  <body>
+    <!-- https://opendata.ecdc.europa.eu/covid19/casedistribution/json/ 
+         https://api.covidtracking.com-->
+    <script>
+      const data_url = "https://api.wheretheiss.at/v1/satellites/25544";
+
+      async function getData() {
+        const response = await fetch(data_url);
+        const data = await response.json();
+        console.log('lon => '+ data.longitude);
+      }
+
+      getData();
+    </script>
+  </body>
+</html>

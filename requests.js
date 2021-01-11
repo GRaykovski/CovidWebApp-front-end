@@ -54,7 +54,7 @@ const getChartData = function() {
 //GET in heatmap format
 const getHeatmapData = function() {
 
-    typeOfAggregation = encodeURIComponent($("#formatsOfAggregation :selected").val());
+    typeOfAggregation = $("#formatsOfAggregation :selected").val();
         $.ajax({
             type:'GET',
             headers:{"X-Session-Id":idOfOperation},

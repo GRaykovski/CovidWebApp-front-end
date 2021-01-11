@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <title>My Chart</title>
+  </head>
+  <body>
+
+    <canvas id="myChart" width="1000px" height="800px"></canvas>
+    
+    <script>
+
+
+      makeChart();
+      
+
+      async function makeChart() {
+        const data = await getData();
+
+        console.log(data);
+
+        const table = document.getElementById('myChart').getContext('2d');
+
+        const myChart = new Chart(table, {
+            type: 'line',
+            data: {
+                labels: data.dateLabel,
+                datasets: [{
+                    label: 'Covid-19 cases BG',
+                    data: data.totalCaseLabel,
+                    backgroundColor:'pink',
+                    borderColor:'black',
+                    borderWidth: 0.5,
+                    hoverBorder: 1,
+                    hoverBackgroundColor: 'green',
+                    fill: false
+                },
+                {
+                    label: 'Covid-19 New cases BG',
+                    data: data.newCasesLabel,
+                    backgroundColor:'red',
+                    borderColor:'black',
+                    borderWidth: 0.5,
+                    hoverBorder: 1,
+                    hoverBackgroundColor: 'blue',
+                    fill: false
+                },
+                {
+                    label: 'Covid-19 deaths BG',
+                    data: data.totalDeathsLabel,
+                    backgroundColor:'grey',
+                    borderColor:'black',
+                    borderWidth: 0.5,
+                    hoverBorder: 1,
+                    hoverBackgroundColor: 'black',
+                    fill: false
+                },
+                {
+                    label: 'Covid-19 New deaths BG',
+                    data: data.newDeathsLabel,
+                    backgroundColor:'orange',
+                    borderColor:'black',
+                    borderWidth: 0.5,
+                    hoverBorder: 1,
+                    hoverBackgroundColor: 'brown',
+                    fill: false
+                }]
+
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                responsive: false
+            }
+        });
+      }
+
+
+      
+
+      async function getData() {
+        const response = await fetch("test.csv");
+        const data = await response.text();
+
+        const dateLabel = [];
+        const totalCaseLabel = [];
+        const newCasesLabel = [];
+        const totalDeathsLabel = [];
+        const newDeathsLabel = [];
+        
+
+        const table = data.split("\n").slice(1);
+
+        table.forEach((row) => {
+          const element = row.split(",");
+          const day = element[3];
+          const dateTime = day.split("-");
+
+          let actualTime;
+
+          
+
+          if (dateTime[1] == 01) {
+            actualTime = dateTime[2] + "-" + "January";
+          } else if (dateTime[1] == 02) {
+            actualTime = dateTime[2] + "-" + "February";
+          } else if (dateTime[1] == 03) {
+            actualTime = dateTime[2] + "-" + "March";
+          } else if (dateTime[1] == 04) {
+            actualTime = dateTime[2] + "-" + "April";
+          } else if (dateTime[1] == 05) {
+            actualTime = dateTime[2] + "-" + "May";
+          } else if (dateTime[1] == 06) {
+            actualTime = dateTime[2] + "-" + "June";
+          } else if (dateTime[1] == 07) {
+            actualTime = dateTime[2] + "-" + "July";
+          } else if (dateTime[1] == 08) {
+            actualTime = dateTime[2] + "-" + "August";
+          } else if (dateTime[1] == 09) {
+            actualTime = dateTime[2] + "-" + "September";
+          } else if (dateTime[1] == 10) {
+            actualTime = dateTime[2] + "-" + "October";
+          } else if (dateTime[1] == 11) {
+            actualTime = dateTime[2] + "-" + "November";
+          } else if (dateTime[1] == 12) {
+            actualTime = dateTime[2] + "-" + "December";
+          }
+          
+          const totalCases = parseInt(element[4]);
+          const newCases = parseInt(element[5]);
+          const totalDeaths = parseInt(element[7]); 
+          const newDeaths = parseInt(element[8]);
+
+
+          dateLabel.push(actualTime);
+          totalCaseLabel.push(totalCases);
+          newCasesLabel.push(newCases);
+          totalDeathsLabel.push(totalDeaths);
+          newDeathsLabel.push(newDeaths);
+
+          
+
+        });
+
+        return {
+            dateLabel:dateLabel,
+            totalCaseLabel:totalCaseLabel, 
+            newCasesLabel:newCasesLabel, 
+            totalDeathsLabel:totalDeathsLabel,
+            newDeathsLabel:newDeathsLabel
+          };
+      };
+    </script>
+  </body>
+</html>

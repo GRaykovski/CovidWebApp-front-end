@@ -21,7 +21,7 @@ const getTableData = function() {
     $.ajax({
         type:'GET',
         url:'/api/v1/data/'+idOfOperation+'/table?page=0',
-        header:{"x-session-id":idOfOperation},
+        header:{"x-session-id":"testSessionId"},
         success:function(data){
             $.each(data.resources,function(i,element){
                 $resultshtmldiv.append(element.someproperty);   //data.resourses
@@ -38,7 +38,7 @@ const getChartData = function() {
     countryOfChoice = encodeURIComponent($("#chartCountriesToChooseFrom :selected").val());
     $.ajax({
             type:'GET',
-            headers:{"X-Session-Id":idOfOperation},
+            headers:{"X-Session-Id":"testSessionId"},
             url:'/api/v1/data/'+idOfOperation+'/diagram?country='+countryOfChoice+'&page=0',
                 success:function(data){
                     $.each(data,function(i,element){
@@ -57,7 +57,7 @@ const getHeatmapData = function() {
     typeOfAggregation = $("#formatsOfAggregation :selected").val();
         $.ajax({
             type:'GET',
-            headers:{"X-Session-Id":idOfOperation},
+            headers:{"X-Session-Id":"testSessionId"},
             url:'/api/v1/data/'+idOfOperation+'/heatmap?page=2&aggregate_by='+typeOfAggregation,
             success:function(data){
                 $.each(data,function(i,element){
@@ -119,7 +119,7 @@ $(function() {
         type:'POST',
         headers:{
             "Content-Type": "application/json",
-            "X-Session-Id":"dsadasdas"},
+            "X-Session-Id":"testSessionId"},
         
         data:JSON.stringify(countriesToOmmit),
         url:'http://localhost/api/v1/analyze_existing_data',
@@ -134,7 +134,7 @@ $(function() {
         })
         getStatusOperation
         getTableData
-         })
+    })
 
 
     $("#chartButton").click(() => {
@@ -144,7 +144,7 @@ $(function() {
             type:'POST',
             headers:{
                 "Content-Type": "application/json",
-                "X-Session-Id":"dsadasdass"},
+                "X-Session-Id":"testSessionId"},
             
             //data:JSON.stringify(countriesToOmmit),
             url:'http://localhost/api/v1/analyze_existing_data',
@@ -159,7 +159,7 @@ $(function() {
             })
             getStatusOperation
             getChartData
-         })
+    })
 
     $("#heatmapButton").click(() => {
     alert(" heatmap button clicked")
@@ -168,7 +168,7 @@ $(function() {
         type:'POST',
         headers:{
             "Content-Type": "application/json",
-            "X-Session-Id":"dsadasdasss"},
+            "X-Session-Id":"testSessionId"},
         
         //data:JSON.stringify(countriesToOmmit),
         url:'http://localhost/api/v1/analyze_existing_data',

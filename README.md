@@ -36,7 +36,7 @@ To start the container use:
 docker run -p 80:80 web-ui:latest
 ```
 
-The web ui will be available at http://`<localhost | public domain>`/
+The web ui will be available at `http://<localhost | public domain>/`
 
 ---
 

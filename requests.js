@@ -1,16 +1,15 @@
 console.log('js file loaded');
 
-    var $resultshtmldiv=$('#somedivinhtml')
-    var $name=$('#somedivinhtml2')
+var tableButton=$('#tableButton')
+var chartButton=$('#chartButton')
+var heatmapButton=$('#heatmapButton')
 
-    var tableButton=$('#tableButton')
-    var chartButton=$('#chartButton')
-    var heatmapButton=$('#heatmapButton')
+var idOfOperation
+var countryOfChoiceHeatmap
+var countryOfChoiceChart  
+var typeOfAggregation
 
-    var idOfOperation
-    var countryOfChoiceHeatmap
-    var countryOfChoiceChart  
-    var typeOfAggregation
+var tableDataJsonResponse
 
 
 // lambda in ecma script
@@ -19,16 +18,17 @@ const getTableData = function() {
 
     console.log("just entered getTabkeData function")
 
-    
+     
     $.ajax({
     type:'GET',
-    url:'/api/v1/data/'+idOfOperation+'/table?page=0',
-    header:{"x-session-id":"testSessionId"},
+    url:'/api/v1/data/'+idOfOperation+'/table',
+    headers:{"x-session-id":"testSessionId",
+            "Content-Type": "application/json",
+            "Accept":"application/json"},
 
     success:function(data){
-        $.each(data.resources,function(i,element){
-            $resultshtmldiv.append(element.someproperty);   //data.resourses
-        })
+        tableDataJsonResponse = data
+        console.log(tableDataJsonResponse)
     },
     error:function(){
         alert(500);
@@ -45,8 +45,10 @@ const getChartData = function() {
 
     $.ajax({
         type:'GET',
-        headers:{"X-Session-Id":"testSessionId"},
-        url:'/api/v1/data/'+idOfOperation+'/diagram?country='+countryOfChoiceChart+'&page=0',
+        headers:{"x-session-id":"testSessionId",
+            "Content-Type": "application/json",
+            "Accept":"application/json"},
+        url:'/api/v1/data/'+idOfOperation+'/diagram?country='+countryOfChoiceChart+'&page=1',
 
             success:function(data){
                 $.each(data,function(i,element){
@@ -70,7 +72,9 @@ const getHeatmapData = function() {
 
     $.ajax({
     type:'GET',
-    headers:{"X-Session-Id":"testSessionId"},
+    headers:{"x-session-id":"testSessionId",
+            "Content-Type": "application/json",
+            "Accept":"application/json"},
     url:'/api/v1/data/'+idOfOperation+'/heatmap?page=2&aggregate_by='+typeOfAggregation,
 
     success:function(data){
@@ -89,7 +93,7 @@ const getHeatmapData = function() {
     
 var completed = false
 
-var poll = function() {
+var poll = function(executeDataView) {
     
 
     console.log("poll function loaded")  
@@ -110,7 +114,7 @@ var poll = function() {
             201: function(response) {
                 console.log("Operation is complete!")
                 completed=true
-                getTableData()
+                executeDataView()
             }
              
         },
@@ -134,7 +138,7 @@ $(function() {
 
     console.log( "document ready!" );
 
-    $("#tableButton").click(() => {
+    $("#tableButton").on("click",function () {
     alert(" table button clicked")
 
     var array = []
@@ -164,9 +168,8 @@ $(function() {
 
             setTimeout(() => {console.log("ID of operation:"+idOfOperation)}, 2000);
 
-            //getStatusOperation()
-            poll()
-            //getTableData()
+            poll(getTableData)
+            
         },
         error:function(){
             alert(500);
@@ -175,7 +178,7 @@ $(function() {
     
 })//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-$("#chartButton").click(() => {
+$("#chartButton").on("click",function () {
     alert(" chart button clicked")
 
     countryOfChoiceChart = $("#chartCountriesToChooseFrom :selected").text()
@@ -197,19 +200,17 @@ $("#chartButton").click(() => {
              setTimeout(() => {console.log(idOfOperation)}, 2000);
             
             
-            getStatusOperation()
-            getChartData()
+            poll(getChartData)
         },
         error:function(){
             alert(500);
         }
     })
-    // setTimeout(() => {getStatusOperation() }, 2000);
-    // setTimeout(() => {getChartData() }, 2000);
+    
 })
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-$("#heatmapButton").click(() => {
+$("#heatmapButton").on("click",function () {
     alert(" heatmap button clicked")
 
     typeOfAggregation = $("#formatsOfAggregation :selected").val();
@@ -232,8 +233,7 @@ $("#heatmapButton").click(() => {
 
         setTimeout(() => {console.log(idOfOperation)}, 2000);
 
-        getStatusOperation()
-        getHeatmapData()
+        poll(getHeatmapData)
     },
         error:function(){
             alert(500);

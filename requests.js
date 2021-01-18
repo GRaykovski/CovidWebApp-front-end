@@ -91,9 +91,7 @@ const getHeatmapData = function() {
     }    
     })
 }
-//GET analysis operation status with polling
-// const getStatusOperation = function() 
-// {     
+/// Poll function
     
 var completed = false
 
@@ -198,11 +196,9 @@ $("#chartButton").on("click",function () {
     url:'http://localhost/api/v1/analyze_existing_data',
     
         success:function(response){   
-            idOfOperation=response.data
-            
-
+            idOfOperation=response
+        
             setTimeout(() => {console.log("ID of operation:"+idOfOperation)}, 2000);
-            
             
             poll(getChartData)
         },
@@ -233,7 +229,7 @@ $("#heatmapButton").on("click",function () {
     url:'http://localhost/api/v1/analyze_existing_data',
 
     success:function(response){   
-        idOfOperation=response.data
+        idOfOperation=response
         
         setTimeout(() => {console.log("ID of operation:"+idOfOperation)}, 2000);
 

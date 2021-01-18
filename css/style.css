@@ -1,8 +1,8 @@
 .container 
 {
     width: 100% !important;
-    padding-left: 0px !important; 
-    padding-right: 0px !important;
+    padding-left: 15% !important; 
+    padding-right: 15% !important;
     margin-right: auto;
     margin-left: auto;
     background-color: rgb(126, 126, 126);
@@ -10,15 +10,18 @@
 
 .carousel .item 
 {
-    height: 500px; 
+    height: 600px; 
 }
 
 .page-footer
 {
     background-color: gray;
+    padding-top: 15px;
 }
 .footer-copyright
 {
+  padding-top: 15px;
+  padding-bottom: 15px;
     background-color:#3333;
 }
 
@@ -114,5 +117,5 @@
     color: #9300ce;
   }
 
-  /* Checkboxes */
+  
   

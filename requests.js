@@ -31,6 +31,9 @@ const getTableData = function() {
     success:function(data){
         tableDataJsonResponse = data
         console.log(tableDataJsonResponse)
+
+        document.getElementById("hiddenSection31").style.visibility= 'visible'
+        
     },
     error:function(){
         alert(500);
@@ -55,6 +58,7 @@ const getChartData = function() {
         success:function(data){
             chartDataJsonResponse = data,
             console.log(chartDataJsonResponse)
+
         },
         error:function(){
             alert(500);
@@ -197,7 +201,7 @@ $("#chartButton").on("click",function () {
             idOfOperation=response.data
             
 
-             setTimeout(() => {console.log(idOfOperation)}, 2000);
+            setTimeout(() => {console.log("ID of operation:"+idOfOperation)}, 2000);
             
             
             poll(getChartData)
@@ -231,7 +235,7 @@ $("#heatmapButton").on("click",function () {
     success:function(response){   
         idOfOperation=response.data
         
-        setTimeout(() => {console.log(idOfOperation)}, 2000);
+        setTimeout(() => {console.log("ID of operation:"+idOfOperation)}, 2000);
 
         poll(getHeatmapData)
     },

@@ -10,6 +10,8 @@ var countryOfChoiceChart
 var typeOfAggregation
 
 var tableDataJsonResponse
+var heatmapDataJsonResponse
+var chartDataJsonResponse
 
 
 // lambda in ecma script
@@ -36,7 +38,7 @@ const getTableData = function() {
     })
 }
 
-//GET in diagram format
+//GET in chart format
 const getChartData = function() {
     
     console.log("just entered getChartData function")
@@ -44,17 +46,16 @@ const getChartData = function() {
     encodeURIComponent(countryOfChoiceChart)
 
     $.ajax({
-        type:'GET',
-        headers:{"x-session-id":"testSessionId",
+    type:'GET',
+    headers:{"x-session-id":"testSessionId",
             "Content-Type": "application/json",
             "Accept":"application/json"},
-        url:'/api/v1/data/'+idOfOperation+'/diagram?country='+countryOfChoiceChart+'&page=1',
+    url:'/api/v1/data/'+idOfOperation+'/diagram?country='+encodeURIComponent(countryOfChoiceChart)+'&page=1',
 
-            success:function(data){
-                $.each(data,function(i,element){
-            $resultshtmldiv.append(element.someproperty);
-        })
-    },
+        success:function(data){
+            chartDataJsonResponse = data,
+            console.log(chartDataJsonResponse)
+        },
         error:function(){
             alert(500);
     }    
@@ -66,21 +67,20 @@ const getHeatmapData = function() {
 
     console.log("just entered getHeatmapData function")
 
-    //
-    ncodeURIcomponent(countryOfChoiceHeatmap)
-    console.log(countryOfChoiceHeatmap)
+    
+    // encodeURIcomponent(countryOfChoiceHeatmap)
+    // console.log(countryOfChoiceHeatmap)
 
     $.ajax({
     type:'GET',
     headers:{"x-session-id":"testSessionId",
             "Content-Type": "application/json",
             "Accept":"application/json"},
-    url:'/api/v1/data/'+idOfOperation+'/heatmap?page=2&aggregate_by='+typeOfAggregation,
+    url:'/api/v1/data/'+idOfOperation+'/heatmap?page=2&aggregate_by='+encodeURIComponent(typeOfAggregation),
 
     success:function(data){
-        $.each(data,function(i,element){
-            $resultshtmldiv.append(element.someproperty);
-    })
+        heatmapDataJsonResponse = data
+        console.log(heatmapDataJsonResponse)
     },
     error:function(){
         alert(500);
@@ -162,9 +162,8 @@ $(function() {
         data:JSON.stringify(countriesToOmmit),
         url:'http://localhost/api/v1/analyze_existing_data',
         
-        success:function(response){   // response.data
+        success:function(response){   
             idOfOperation=response
-            //console.log(idOfOperation)
 
             setTimeout(() => {console.log("ID of operation:"+idOfOperation)}, 2000);
 
@@ -181,8 +180,9 @@ $(function() {
 $("#chartButton").on("click",function () {
     alert(" chart button clicked")
 
-    countryOfChoiceChart = $("#chartCountriesToChooseFrom :selected").text()
-    console.log(countryOfChoiceChart)
+    countryOfChoiceChart = $("#chartCountriesToChooseFrom :selected").val()
+   
+    console.log("country selected:" + encodeURIComponent(countryOfChoiceChart))
 
     $.ajax({
     type:'POST',
@@ -193,9 +193,9 @@ $("#chartButton").on("click",function () {
     //data:JSON.stringify(countriesToOmmit),
     url:'http://localhost/api/v1/analyze_existing_data',
     
-        success:function(response){   // response.data
+        success:function(response){   
             idOfOperation=response.data
-            //console.log(idOfOperation)
+            
 
              setTimeout(() => {console.log(idOfOperation)}, 2000);
             
@@ -214,9 +214,10 @@ $("#heatmapButton").on("click",function () {
     alert(" heatmap button clicked")
 
     typeOfAggregation = $("#formatsOfAggregation :selected").val();
-    console.log(typeOfAggregation)
+    console.log("aggregation selected:" + encodeURIComponent(typeOfAggregation))
 
-    countryOfChoiceHeatmap = $("#heatmapCountriesToChooseFrom :selected").text()
+    countryOfChoiceHeatmap = $("#heatmapCountriesToChooseFrom :selected").val()
+    console.log("country selected:" + encodeURIComponent(countryOfChoiceHeatmap))
 
     $.ajax({
     type:'POST',
@@ -227,10 +228,9 @@ $("#heatmapButton").on("click",function () {
     //data:JSON.stringify(countriesToOmmit),
     url:'http://localhost/api/v1/analyze_existing_data',
 
-    success:function(response){   // response.data
+    success:function(response){   
         idOfOperation=response.data
-        //console.log(idOfOperation)
-
+        
         setTimeout(() => {console.log(idOfOperation)}, 2000);
 
         poll(getHeatmapData)

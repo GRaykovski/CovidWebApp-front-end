@@ -125,29 +125,33 @@
   <p>heatmap on the right</p>
 
   <label for="heatmapCountryChoiceLb">Choose country:</label>
+  <div class="select">
+    <select name="countries" id="heatmapCountriesToChooseFrom">
 
-  <select name="countries" id="heatmapCountriesToChooseFrom">
+      <option selected disabled>Choose an option!</option>
+      <option value="bulgaria">Bulgaria</option>
+      <option value="united kingdom">United Kingdom</option>
+      <option value="germany">Germany</option>
+      <option value="france">France</option>
+    </select>
+  </div>
 
-    <option value="Bulgaria">Bulgaria</option>
-    <option value="United Kingdom">United Kingdom</option>
-    <option value="Germany">Germany</option>
-    <option value="France">France</option>
-  </select>
-  
   <br><br>
 
   <label for="dataFormatlLb">Aggregate by:</label>
 
-  <select name="formatComboBox" id="formatsOfAggregation">
-
-    <option value="day">Day</option>
-    <option value="week">Week</option>
-    <option value="month">Month</option>
-    
-  </select>
+  <div class="select">
+    <select name="formatComboBox" id="formatsOfAggregation">
+      <option selected disabled>Choose an option!</option>
+      <option value="day">Day</option>
+      <option value="week">Week</option>
+      <option value="month">Month</option>
+      
+    </select>
+  </div>
 
   <br><br>
-  <button class="button heatmapButton" id="heatmapButton" name="heatmapButton">SUBMIT</button>
+  <button class="button" id="heatmapButton" style="vertical-align:middle"><span>SUBMIT </span></button>
 
 </div>
 <div id="section31" class="container-fluid">
@@ -157,16 +161,17 @@
 
   <label for="countriesToOmmit">If you dont want to see information about a certain country please 'TICK' it below!</label>
   <br></br>
-  <input type="checkbox" id="country1" name="country1" value="Bulgaria">
-  <label for="country1"> Bulgaria</label><br>
-  <input type="checkbox" id="country2" name="country2" value="United Kingdom">
-  <label for="country2"> United Kingdom</label><br>
-  <input type="checkbox" id="country3" name="country3" value="Germany">
-  <label for="country3"> Germany</label><br>
-  <input type="checkbox" id="country4" name="country4" value="France">
-  <label for="country3"> France</label><br>
-
-  <button class="button tableButton" id = "tableButton" name="tableButton">SUBMIT</button>
+  <div class="checkboxes">
+    <input type="checkbox" id="country1" name="country1" value="bulgaria">
+    <label for="country1"> Bulgaria</label><br>
+    <input type="checkbox" id="country2" name="country2" value="united kingdom">
+    <label for="country2"> United Kingdom</label><br>
+    <input type="checkbox" id="country3" name="country3" value="germany">
+    <label for="country3"> Germany</label><br>
+    <input type="checkbox" id="country4" name="country4" value="france">
+    <label for="country3"> France</label><br>
+  </div>
+  <button class="button" id="tableButton" style="vertical-align:middle"><span>SUBMIT </span></button>
 
 
 </div>
@@ -176,16 +181,18 @@
   <p>chart</p>
 
   <label for="chartCountryChoiceLb">Choose country:</label>
+  <div class="select">
+    <select name="countries2" id="chartCountriesToChooseFrom">
 
-  <select name="countries2" id="chartCountriesToChooseFrom">
-
-    <option value="Bulgaria">Bulgaria</option>
-    <option value="United Kingdom">United Kingdom</option>
-    <option value="Germany">Germany</option>
-    <option value="France">France</option>
-  </select>
+      <option selected disabled>Choose an option!</option>
+      <option value="bulgaria">Bulgaria</option>
+      <option value="united Kingdom">United Kingdom</option>
+      <option value="germany">Germany</option>
+      <option value="france">France</option>
+    </select>
+  </div>
   <br></br>
-  <button class="button chartButton" id="chartButton" name="chartButton">SUBMIT</button>
+  <button class="button" id="chartButton" style="vertical-align:middle"><span>SUBMIT </span></button>
 
 </div>
 <div id="section4" class="container-fluid">

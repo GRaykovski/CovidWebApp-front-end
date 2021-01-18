@@ -59,6 +59,8 @@ const getChartData = function() {
             chartDataJsonResponse = data,
             console.log(chartDataJsonResponse)
 
+            document.getElementById("hiddenSection32").style.visibility= 'visible'
+
         },
         error:function(){
             alert(500);
@@ -85,6 +87,9 @@ const getHeatmapData = function() {
     success:function(data){
         heatmapDataJsonResponse = data
         console.log(heatmapDataJsonResponse)
+
+        document.getElementById("hiddenSection2").style.visibility= 'visible'
+
     },
     error:function(){
         alert(500);
